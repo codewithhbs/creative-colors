@@ -6,14 +6,15 @@ const BlogDetail = () => {
   return (
     <div className="bg-[#FDFBF7] min-h-screen">
       {/* Banner */}
-            <div className="relative  text-white py-24" style={
-              {
-                backgroundImage: `url(${bannerImg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center top',
-              }
-            }>
-              <div className="absolute inset-0 bg-black/60"></div>
+      <div
+        className="relative  text-white py-24"
+        style={{
+          backgroundImage: `url(${bannerImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative max-w-4xl mx-auto text-center px-6">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
             Our{" "}
@@ -39,17 +40,21 @@ const BlogDetail = () => {
         </h2>
 
         <p className="text-lg text-gray-700 leading-relaxed mb-6">
-          At <span className="font-semibold text-[#81190B]">Creative N Colourful</span>, 
-          we believe spices are more than just ingredients – they are the soul of 
-          every Indian kitchen. That’s why our{" "}
-          <strong>Haldi, Dhania, Garam Masala, and Lal Mirch</strong> are 
-          crafted with love, care, and a promise of <em>100% natural purity</em>.
+          At{" "}
+          <span className="font-semibold text-[#81190B]">
+            Creative N Colourful
+          </span>
+          , we believe spices are more than just ingredients – they are the soul
+          of every Indian kitchen. That’s why our{" "}
+          <strong>Haldi, Dhania, Garam Masala, and Lal Mirch</strong> are
+          crafted with love, care, and a promise of <em>100% natural purity</em>
+          .
         </p>
 
         <p className="text-lg text-gray-700 leading-relaxed mb-6">
-          Unlike mass-produced powders, our masalas are stone-ground to preserve 
-          their natural oils and aroma. No added colors, no artificial flavors – 
-          only the rich, authentic taste that reminds you of your grandmother’s 
+          Unlike mass-produced powders, our masalas are stone-ground to preserve
+          their natural oils and aroma. No added colors, no artificial flavors –
+          only the rich, authentic taste that reminds you of your grandmother’s
           recipes.
         </p>
 
@@ -64,10 +69,10 @@ const BlogDetail = () => {
         </ul>
 
         <p className="text-lg text-gray-700 leading-relaxed mt-6">
-          Whether it’s the golden glow of <strong>Haldi</strong>, the earthy 
+          Whether it’s the golden glow of <strong>Haldi</strong>, the earthy
           notes of <strong>Dhania</strong>, the fiery punch of{" "}
           <strong>Lal Mirch</strong>, or the balanced warmth of{" "}
-          <strong>Garam Masala</strong> – every pinch brings you closer to the 
+          <strong>Garam Masala</strong> – every pinch brings you closer to the
           roots of India’s spice heritage.
         </p>
 

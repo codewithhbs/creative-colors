@@ -277,7 +277,7 @@ const Shop = () => {
                   type="text"
                   value={localSearch}
                   onChange={(e) => setLocalSearch(e.target.value)}
-                  placeholder="Search spices, teas…"
+                  placeholder="Search gifts, decor & more..."
                   className="w-full pl-10 pr-4 py-3 rounded-full focus:outline-none"
                   style={{
                     fontFamily: "'DM Sans',sans-serif",

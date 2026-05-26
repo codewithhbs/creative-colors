@@ -8,7 +8,7 @@ import "./Category.css";
 const CategoryCard = ({ category }) => {
   const imageUrl = category.image
     ? `${IMAGEAPI}${category.image}`
-    : "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80";
+    : "/img/no-image.jpg";
 
   return (
     <Link to={`/shop?category=${category.name}`} className="category-card">
@@ -62,9 +62,7 @@ const ShopByCategory = () => {
         {/* Grid */}
         <div className="category-grid">
           {loading
-            ? [1, 2, 3, 4].map((i) => (
-                <div className="skeleton" key={i}></div>
-              ))
+            ? [1, 2, 3, 4].map((i) => <div className="skeleton" key={i}></div>)
             : categories.map((cat) => (
                 <CategoryCard key={cat._id} category={cat} />
               ))}

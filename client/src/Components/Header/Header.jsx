@@ -232,7 +232,7 @@ const Header = () => {
                   ref={searchRef}
                   className="hdr-search-input"
                   type="text"
-                  placeholder="Search spices, chai, teas..."
+                  placeholder="Search gifts, decor, nameplates & more..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
