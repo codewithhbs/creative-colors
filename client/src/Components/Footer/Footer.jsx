@@ -171,7 +171,7 @@ const Footer = () => {
 
               <div className="ftr-contact-list">
                 {[
-                  { icon: MapPin, text: address },
+                  // { icon: MapPin, text: address },
                   { icon: Phone, text: phone, href: `tel:${phone}` },
                   {
                     icon: Mail,

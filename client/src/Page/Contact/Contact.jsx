@@ -660,12 +660,12 @@ const Contact = () => {
       value: settings.supportEmail || "creativencolourful7777@gmail.com",
       sub: "Reply within 24 hours",
     },
-    {
-      icon: <IPin />,
-      label: "Address",
-      value: settings.address || "B-14 Amar Colony, Lajpat Nagar IV",
-      sub: "Visit our store",
-    },
+    // {
+    //   icon: <IPin />,
+    //   label: "Address",
+    //   value: settings.address || "B-14 Amar Colony, Lajpat Nagar IV",
+    //   sub: "Visit our store",
+    // },
     {
       icon: <IClock />,
       label: "Store Hours",
@@ -685,11 +685,11 @@ const Contact = () => {
       label: "Email",
       val: settings.supportEmail || "support@example.com",
     },
-    {
-      icon: <IPin />,
-      label: "Address",
-      val: settings.address || "New Delhi, India",
-    },
+    // {
+    //   icon: <IPin />,
+    //   label: "Address",
+    //   val: settings.address || "New Delhi, India",
+    // },
   ];
 
   return (

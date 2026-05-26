@@ -18,6 +18,7 @@ const BlogDetail = () => {
       setLoading(true);
       setError(null);
       const { data } = await axios.get(`${API_URL}/${slug}`);
+      
       if (data.success) {
         setBlog(data.blog);
       } else {
@@ -35,6 +36,7 @@ const BlogDetail = () => {
     try {
       setBlogsLoading(true);
       const { data } = await axios.get(API_URL);
+      // console.log("Fetched blog data:", data.blogs);
       if (data.success) {
         setBlogs(data.blogs || []);
       }
@@ -56,6 +58,7 @@ const BlogDetail = () => {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 5);
 
+    // console.log("latestBlogs",blogs)
   return (
     <div className="bg-[#FDFBF7] min-h-screen">
       {/* Banner */}

@@ -158,10 +158,10 @@ const Return = () => {
               <span>creativencolourful7777@gmail.com</span>
             </div>
 
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <MapPin className="w-5 h-5 mr-3 text-amber-300" />
               <span>B-14 Amar Colony, Lajpat Nagar IV, New Delhi</span>
-            </div>
+            </div> */}
           </div>
 
           <p className="mt-5 text-sm opacity-75">

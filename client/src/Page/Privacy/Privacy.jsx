@@ -235,7 +235,7 @@ const Privacy = () => {
               <span>
                 Creative N Colourful
                 <br />
-                B-14 Amar Colony, Lajpat Nagar IV, New Delhi
+                {/* B-14 Amar Colony, Lajpat Nagar IV, New Delhi */}
               </span>
             </div>
 
