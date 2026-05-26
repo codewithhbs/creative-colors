@@ -98,7 +98,7 @@ const EditProduct = () => {
 
   const fetchCategoryData = async () => {
     try {
-      const res = await axios.get("https://api.creativencolourful.com/api/v1/admin/category")
+      const res = await axios.get("https://www.api.creativencolourful.com/api/v1/admin/category")
       const data = res.data.categories
 
       if (data) {
@@ -204,7 +204,7 @@ const EditProduct = () => {
 
   const handleFetchProductDetails = async () => {
     try {
-      const { data } = await axios.get(`https://api.creativencolourful.com/api/v1/get-product/${id}`)
+      const { data } = await axios.get(`https://www.api.creativencolourful.com/api/v1/get-product/${id}`)
       const productData = data?.data
 
       console.log("productData", productData)
@@ -297,7 +297,7 @@ const EditProduct = () => {
         }
       })
 
-      const { data } = await axios.post(`https://api.creativencolourful.com/api/v1/update-product/${id}`, formDataObject, {
+      const { data } = await axios.post(`https://www.api.creativencolourful.com/api/v1/update-product/${id}`, formDataObject, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

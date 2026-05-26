@@ -16,7 +16,7 @@ export const applyPromoCode = createAsyncThunk(
   "cart/applyPromoCode",
   async ({ code, orderAmount }, { rejectWithValue }) => {
     try {
-      const response = await axios.post("https://api.creativencolourful.com/api/v1/apply-coupon", {
+      const response = await axios.post("https://www.api.creativencolourful.com/api/v1/apply-coupon", {
         code,
         orderAmount,
       })

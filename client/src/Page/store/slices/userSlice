@@ -9,7 +9,7 @@ export const fetchUserDetails = createAsyncThunk("user/fetchUserDetails", async 
       throw new Error("No token found")
     }
 
-    const { data } = await axios.get("https://api.creativencolourful.com/api/v1/my-details", {
+    const { data } = await axios.get("https://www.api.creativencolourful.com/api/v1/my-details", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

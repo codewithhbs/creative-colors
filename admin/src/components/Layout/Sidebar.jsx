@@ -43,11 +43,11 @@ const Sidebar = ({ isSidebarOpen, onLogout }) => {
       icon: PackageOpenIcon,
       path: '/Categories'
     },
-    {
-      title: 'Hero Sliders',
-      icon: PackageOpenIcon,
-      path: '/admin/hero-slider'
-    },
+    // {
+    //   title: 'Hero Sliders',
+    //   icon: PackageOpenIcon,
+    //   path: '/admin/hero-slider'
+    // },
     // {
     //   title: 'Testimonial',
     //   icon: Image,
@@ -56,14 +56,14 @@ const Sidebar = ({ isSidebarOpen, onLogout }) => {
     //     { title: 'Manage Testimonial', path: '/Testimonial/manage', icon: Layers }
     //   ]
     // },
-    // {
-    //   title: 'Blogs',
-    //   icon: LucideNotebookPen,
-    //   submenu: [
-    //     { title: 'Create Blog', path: '/Blogs/create', icon: Plus },
-    //     { title: 'Manage Blog', path: '/Blogs/manage', icon: Layers }
-    //   ]
-    // },
+    {
+      title: 'Blogs',
+      icon: LucideNotebookPen,
+      submenu: [
+        { title: 'Create Blog', path: '/Blogs/create', icon: Plus },
+        { title: 'Manage Blog', path: '/Blogs/manage', icon: Layers }
+      ]
+    },
     {
       title: 'Users',
       icon: Users,

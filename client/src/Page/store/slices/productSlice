@@ -4,7 +4,7 @@ import axios from "axios"
 // Async thunk for fetching product details
 export const fetchProduct = createAsyncThunk("product/fetchProduct", async (productId, { rejectWithValue }) => {
   try {
-    const { data } = await axios.get(`https://api.creativencolourful.com/api/v1/get-product/${productId}`)
+    const { data } = await axios.get(`https://www.api.creativencolourful.com/api/v1/get-product/${productId}`)
     return data.data
   } catch (error) {
     return rejectWithValue(error.response?.data?.message || "Failed to fetch product")

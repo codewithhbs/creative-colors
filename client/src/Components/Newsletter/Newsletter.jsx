@@ -11,7 +11,7 @@ const Newsletter = () => {
   const handleSubmit = async(e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('https://api.creativencolourful.com/api/v1/create-newsletter', { email })
+      const response = await axios.post('https://www.api.creativencolourful.com/api/v1/create-newsletter', { email })
       setIsSubscribed(true)
       setEmail('')
       toast.success(response.data.message)

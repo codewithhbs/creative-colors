@@ -5,8 +5,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import SubCategory from "./SubCategory";
 
-const API = "https://api.creativencolourful.com/api/v1"
-const IMAGEAPI = "https://api.creativencolourful.com";
+const API = "https://www.api.creativencolourful.com/api/v1"
+const IMAGEAPI = "https://www.api.creativencolourful.com";
 ;
 
 const Categories = () => {
@@ -187,7 +187,7 @@ const Categories = () => {
                   <td className="border border-gray-300 text-black px-4 py-2 text-center">
                     {category.image ? (
                       <img
-                        src={`https://api.creativencolourful.com${category.image}`}
+                        src={`https://www.api.creativencolourful.com${category.image}`}
                         alt={category.name}
                         className="h-12 w-12 object-cover rounded mx-auto"
                         onError={(e) => (e.currentTarget.style.display = "none")}

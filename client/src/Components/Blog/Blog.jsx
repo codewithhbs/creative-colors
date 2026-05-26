@@ -4,7 +4,7 @@ import axios from "axios";
 import { Leaf, ArrowRight, Clock, User } from "lucide-react";
 import "./BlogSection.css";
 
-const API_URL = "https://api.creativencolourful.com/api/v1/blog";
+const API_URL = "https://www.api.creativencolourful.com/api/v1/blog";
 
 /* ── Date formatter ── */
 const formatDate = (dateStr) => {

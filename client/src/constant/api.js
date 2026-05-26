@@ -1,2 +1,2 @@
-export const API='https://api.creativencolourful.com/api/v1'
-export const IMAGEAPI='https://api.creativencolourful.com'
+export const API='https://www.api.creativencolourful.com/api/v1'
+export const IMAGEAPI='https://www.api.creativencolourful.com'

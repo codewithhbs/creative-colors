@@ -38,7 +38,7 @@ const Profile = () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get(
-          "https://api.creativencolourful.com/api/v1/my-details",
+          "https://www.api.creativencolourful.com/api/v1/my-details",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ const Profile = () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get(
-          "https://api.creativencolourful.com/api/v1/my-all-order",
+          "https://www.api.creativencolourful.com/api/v1/my-all-order",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ const Profile = () => {
     try {
       const token = sessionStorage.getItem("token_login");
       const { data } = await axios.delete(
-        "https://api.creativencolourful.com/api/v1/delete-account",
+        "https://www.api.creativencolourful.com/api/v1/delete-account",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -114,7 +114,7 @@ const Profile = () => {
     try {
       const token = sessionStorage.getItem("token_login");
       const { data } = await axios.put(
-        `https://api.creativencolourful.com/api/v1/refund-request-order/${selectedOrder._id}`,
+        `https://www.api.creativencolourful.com/api/v1/refund-request-order/${selectedOrder._id}`,
         {
           refundReason: refundReason,
         },

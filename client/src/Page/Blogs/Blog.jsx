@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Leaf, ArrowRight, Clock, User } from 'lucide-react';
 
-const API_URL = 'https://api.creativencolourful.com/api/v1/blog';
+const API_URL = 'https://www.api.creativencolourful.com/api/v1/blog';
 
 const GRAIN = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")`;
 
@@ -43,7 +43,7 @@ const BlogCard = ({ blog, index }) => {
 
   return (
     <Link
-      to={`/blogs/${blog.slug}`}
+      to={`/blogs-details/${blog.slug}`}
       className="group block rounded-xl overflow-hidden bg-white/70 transition-all duration-400"
       style={{
         border: `1px solid ${hovered ? 'rgba(200,151,58,0.35)' : 'rgba(200,151,58,0.12)'}`,

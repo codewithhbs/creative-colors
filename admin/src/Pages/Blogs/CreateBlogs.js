@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const CreateBlogs = () => {
-  const url = `https://api.creativencolourful.com/api/v1/blog`;
+  const url = `https://www.api.creativencolourful.com/api/v1/blog`;
 
   const [formData, setFormData] = useState({
     meta_title: "",

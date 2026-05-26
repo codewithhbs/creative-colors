@@ -283,21 +283,21 @@ const CheckoutFlow = () => {
     const boot = async () => {
       try {
         // Fetch settings
-        const settingsRes = await axios.get("https://api.creativencolourful.com/api/v1/admin/settings");
+        const settingsRes = await axios.get("https://www.api.creativencolourful.com/api/v1/admin/settings");
         if (settingsRes.data?.data) setSetting(settingsRes.data.data);
 
         // Fetch user if logged in
         const token = sessionStorage.getItem("token_login");
         if (token) {
           dispatch(fetchUserDetails());
-          const { data } = await axios.get("https://api.creativencolourful.com/api/v1/my-details", {
+          const { data } = await axios.get("https://www.api.creativencolourful.com/api/v1/my-details", {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(data.data || {});
 
           // Pre-fill last order address
           try {
-            const lastOrder = await axios.get("https://api.creativencolourful.com/api/v1/my-last-order", {
+            const lastOrder = await axios.get("https://www.api.creativencolourful.com/api/v1/my-last-order", {
               headers: { Authorization: `Bearer ${token}` },
             });
             if (lastOrder.data?.success && lastOrder.data.order?.shipping) {
@@ -344,7 +344,7 @@ const CheckoutFlow = () => {
     try {
       dispatch(clearError());
       setGuestSubmitting(true);
-      const res = await axios.post("https://api.creativencolourful.com/api/v1/create_user_from_cart", { Email, ContactNumber });
+      const res = await axios.post("https://www.api.creativencolourful.com/api/v1/create_user_from_cart", { Email, ContactNumber });
       if (res.data?.success) {
         const { token } = res.data;
         if (token) sessionStorage.setItem("token_login", token);
@@ -416,7 +416,7 @@ const CheckoutFlow = () => {
     if (paymentMethod === "COD") {
       try {
         const res = await axios.post(
-          "https://api.creativencolourful.com/api/v1/create-cod-order",
+          "https://www.api.creativencolourful.com/api/v1/create-cod-order",
           { orderData, amount: shipping || 50 },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -465,7 +465,7 @@ const CheckoutFlow = () => {
 
           try {
             const verify = await axios.post(
-              "https://api.creativencolourful.com/api/v1/verify-payment",
+              "https://www.api.creativencolourful.com/api/v1/verify-payment",
               response
             );
 

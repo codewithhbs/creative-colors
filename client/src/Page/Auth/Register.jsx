@@ -32,7 +32,7 @@ const Register = () => {
         setLoading(true)
         try {
             console.log("Submitting Registration Form with Data:", formData);
-            const response = await axios.post(`https://api.creativencolourful.com/api/v1/regsiter-user`, formData)
+            const response = await axios.post(`https://www.api.creativencolourful.com/api/v1/regsiter-user`, formData)
             console.log("Submitting Registration Form with Data: done");
             const user = response.data.data
             // window.location.href = `/Verify-Otp?type=register&email=${user?.Email || formData.Email}&number=${user?.ContactNumber || formData.ContactNumber}`

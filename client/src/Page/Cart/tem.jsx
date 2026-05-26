@@ -145,7 +145,7 @@ const CheckoutFlow = () => {
       setGuestSubmitting(true);
 
       const res = await axios.post(
-        "https://api.creativencolourful.com/api/v1/create_user_from_cart",
+        "https://www.api.creativencolourful.com/api/v1/create_user_from_cart",
         {
           Email,
           ContactNumber,
@@ -255,7 +255,7 @@ const CheckoutFlow = () => {
           },
           handler: function (response) {
             axios
-              .post("https://api.creativencolourful.com/api/v1/verify-payment", response)
+              .post("https://www.api.creativencolourful.com/api/v1/verify-payment", response)
               .then((responseData) => {
                 if (responseData.data.success) {
                   // ✅ ab cart clear karo

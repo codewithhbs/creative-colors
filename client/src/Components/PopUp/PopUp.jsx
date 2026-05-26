@@ -108,7 +108,7 @@ const handleClose = () => {
       };
 
       const res = await axios.post(
-        "https://api.creativencolourful.com/api/v1/support-request",
+        "https://www.api.creativencolourful.com/api/v1/support-request",
         payload
       );
 

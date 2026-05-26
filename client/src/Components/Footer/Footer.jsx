@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import "./Footer.css";
 
-const API = "https://api.creativencolourful.com/api/v1";
+const API = "https://www.api.creativencolourful.com/api/v1";
 
 const quickLinks = [
   { label: "Home", to: "/" },

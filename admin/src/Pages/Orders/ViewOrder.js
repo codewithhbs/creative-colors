@@ -44,7 +44,7 @@ const ViewOrder = () => {
     try {
       setLoading(true);
       const res = await fetch(
-        `https://api.creativencolourful.com/api/v1/recent-order/${id}`
+        `https://www.api.creativencolourful.com/api/v1/recent-order/${id}`
       );
       const data = await res.json();
       setOrderData(data.data);
@@ -74,7 +74,7 @@ const ViewOrder = () => {
       setLoading(true);
 
       const res = await fetch(
-        "https://api.creativencolourful.com/api/v1/admin/change-order-status",
+        "https://www.api.creativencolourful.com/api/v1/admin/change-order-status",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -108,7 +108,7 @@ const ViewOrder = () => {
       setLoading(true);
 
       const res = await fetch(
-        "https://api.creativencolourful.com/api/v1/admin/change-order-status",
+        "https://www.api.creativencolourful.com/api/v1/admin/change-order-status",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

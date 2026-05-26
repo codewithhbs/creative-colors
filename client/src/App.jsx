@@ -77,7 +77,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/track-your-order" element={<TrackYourOrder />} />
             <Route path="/blogs" element={<Blogs />} />
-            <Route path="/blogs-details" element={<BlogsDetals />} />
+            <Route path="/blogs-details/:slug" element={<BlogsDetals />} />
             <Route path="/Receipt/order-confirmed" element={<SuccessPage />} />
             <Route path="/receipt-cod/order-confirmed" element={<SuccessPageCOD />} />
           </Routes>

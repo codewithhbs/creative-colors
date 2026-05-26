@@ -18,7 +18,7 @@ import axios from "axios";
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable';
 
-const API_BASE = "https://api.creativencolourful.com/api/v1";
+const API_BASE = "https://www.api.creativencolourful.com/api/v1";
 
 const styleSheet = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap');

@@ -55,7 +55,7 @@ function Settings() {
 
   const fetchSettings = async () => {
     try {
-      const response = await fetch("https://api.creativencolourful.com/api/v1/admin/settings");
+      const response = await fetch("https://www.api.creativencolourful.com/api/v1/admin/settings");
       const result = await response.json();
 
       if (result.success && result.data) {
@@ -97,7 +97,7 @@ function Settings() {
 
     try {
       const response = await axios.put(
-        `https://api.creativencolourful.com/api/v1/admin/settings/${settings._id}`,
+        `https://www.api.creativencolourful.com/api/v1/admin/settings/${settings._id}`,
         settings
       );
 
