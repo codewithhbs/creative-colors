@@ -108,6 +108,15 @@ async function initiateRazorpay(req, res, order) {
     const razorpaySecret =
       process.env.RAZORPAY_SECRET || settingsDoc?.paymentGateway?.secret;
 
+      
+    // ✅ Add this to debug the source
+    console.log("[RAZORPAY] Key source:", process.env.RAZORPAY_KEY_ID ? "ENV" : "DB");
+    console.log("[RAZORPAY] Secret source:", process.env.RAZORPAY_SECRET ? "ENV" : "DB");
+    console.log("[RAZORPAY] Key ID:", razorpayKey);
+    // Never log the full secret, just first 4 chars
+    console.log("[RAZORPAY] Secret preview:", razorpaySecret?.slice(0, 4) + "****");
+    console.log("[RAZORPAY] Key length:", razorpayKey?.length);     // should be ~24
+console.log("[RAZORPAY] Secret length:", razorpaySecret?.length); // should be ~24
     if (!razorpayKey || !razorpaySecret) {
       return res.status(500).json({
         success: false,

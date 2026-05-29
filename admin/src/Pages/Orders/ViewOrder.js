@@ -556,15 +556,19 @@ const ViewOrder = () => {
                 <span className="text-gray-600">Delivery Fee</span>
                 <span>{orderData.shippingAmount > 0 ? `₹${orderData.shippingAmount}` : "Free"}</span>
               </div>
-              {orderData.paymentType === "COD" &&
+              <div className="flex justify-between">
+                <span className="text-gray-600">Tax</span>
+                <span>18%</span>
+              </div>
+              {/* {orderData.paymentType === "COD" &&
                 <div className="flex justify-between">
                   <span className="text-gray-600">COD Advance</span>
                   <span>-₹{orderData.codFeeAmount}</span>
-                </div>}
+                </div>} */}
 
               <div className="flex justify-between font-semibold text-lg border-t pt-3">
                 <span>Total</span>
-                <span>₹{orderData.payAmt - (orderData.paymentType === "COD" ? orderData.codFeeAmount : 0)}</span>
+                <span>₹{orderData.payAmt - (orderData.paymentType === "COD" ? 0 : 0)}</span>
               </div>
               {orderData.offerId && Object.keys(orderData.offerId).length > 0 && (
                 <div className="bg-green-50 p-3 rounded-lg">

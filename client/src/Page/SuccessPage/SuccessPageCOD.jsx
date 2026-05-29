@@ -204,7 +204,7 @@ const totals = useMemo(() => {
       return;
     }
 
-    const siteName = settings?.siteName || "Creative N Colourful ";
+    const siteName = "Creative N Colourful ";
     const companyGST = "22AAAAA0000A1Z5"; // ← Replace with real GSTIN
     const companyAddress = "Creative N Colourful , Mumbai, Maharashtra - 400001";
     const companyEmail = settings?.supportEmail || "support@Creative N Colourful .com";
@@ -216,7 +216,7 @@ const totals = useMemo(() => {
     let y = margin;
 
     // Logo + Company Name + TAX INVOICE
-    doc.addImage("https://i.ibb.co/7x12jcpj/alogo.png", "PNG", margin, y, 32, 32);
+    // doc.addImage("https://i.ibb.co/S7v1KXm5/logo.png", "PNG", margin, y, 32, 32);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(16);
@@ -424,7 +424,7 @@ const totals = useMemo(() => {
     );
   }
 
-  const siteName = settings?.siteName || "Creative N Colourful ";
+  const siteName = "Creative N Colourful ";
   const contactNumber = settings?.contactNumber || "+91 XXXX XXXX";
   const supportEmail = settings?.supportEmail || "support@Creative N Colourful .com";
 

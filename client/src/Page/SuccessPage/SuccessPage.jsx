@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import jsPDF from "jspdf";
-import autoTable from 'jspdf-autotable';
+import autoTable from "jspdf-autotable";
 
 const API_BASE = "https://www.api.creativencolourful.com/api/v1";
 
@@ -112,7 +112,7 @@ const styleSheet = `
 const formatCurrencySafe = (amount) => {
   return new Intl.NumberFormat("en-IN", {
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    maximumFractionDigits: 2,
   }).format(amount || 0);
 };
 
@@ -173,7 +173,8 @@ export default function SuccessPage() {
   useEffect(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      const dataParam = params.get("data") || params.get("orderId") || params.get("id");
+      const dataParam =
+        params.get("data") || params.get("orderId") || params.get("id");
 
       if (dataParam) {
         setOrderId(dataParam);
@@ -206,7 +207,7 @@ export default function SuccessPage() {
         // Fetch order
         const orderUrl = `${API_BASE}/my-recent-order/${encodeURIComponent(orderId)}`;
         const orderResp = await axios.get(orderUrl, { headers });
-        console.log(orderResp?.data?.data)
+        console.log(orderResp?.data?.data);
         if (orderResp?.data?.success && orderResp?.data?.data) {
           setOrder(orderResp?.data?.data);
         } else {
@@ -226,7 +227,10 @@ export default function SuccessPage() {
       } catch (err) {
         console.error("Fetch error:", err);
 
-        if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+        if (
+          err.response &&
+          (err.response.status === 401 || err.response.status === 403)
+        ) {
           setError("You are not logged in. Please login to view this order.");
         } else if (err.response?.data?.message) {
           setError(err.response.data.message);
@@ -245,17 +249,18 @@ export default function SuccessPage() {
   const calculateTotals = () => {
     if (!order || !settings) return null;
 
-    const itemsSubtotal = order.items?.reduce(
-      (sum, item) => sum + (item.quantity || 0) * (item.price || 0),
-      0
-    ) ?? 0;
+    const itemsSubtotal =
+      order.items?.reduce(
+        (sum, item) => sum + (item.quantity || 0) * (item.price || 0),
+        0,
+      ) ?? 0;
 
     const taxRate = settings.isTaxEnables ? settings.taxRate || 18 : 0;
-    const taxAmount = (itemsSubtotal * taxRate) / 100;
+    const shipping = order.shippingAmount ?? 0;
+    const taxAmount = ((itemsSubtotal + shipping) * taxRate) / 100;
     const itemsWithTax = itemsSubtotal + taxAmount;
 
-    const shipping = order.shippingAmount ?? 0;
-    const discount = order.offerId ? (order.totalAmount - order.payAmt) || 0 : 0;
+    const discount = order.offerId ? order.totalAmount - order.payAmt || 0 : 0;
 
     const grandTotal = order.payAmt ?? itemsWithTax + shipping - discount;
 
@@ -276,10 +281,12 @@ export default function SuccessPage() {
   const handleDownloadPDF = () => {
     if (!order || !totals) return;
 
-    const siteName = settings?.siteName || "Creative N Colourful ";
-    const companyGST = "22AAAAA0000A1Z5"; 
-    const companyAddress = "Creative N Colourful , Mumbai, Maharashtra - 400001";
-    const companyEmail = settings?.supportEmail || "support@Creative N Colourful .com";
+    const siteName = "Creative N Colourful ";
+    const companyGST = "22AAAAA0000A1Z5";
+    const companyAddress =
+      "Creative N Colourful , Mumbai, Maharashtra - 400001";
+    const companyEmail =
+      settings?.supportEmail || "support@Creative N Colourful .com";
 
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -288,7 +295,7 @@ export default function SuccessPage() {
     let y = margin;
 
     // ── Logo + Company Name + TAX INVOICE ──────────────────────────────
-    doc.addImage("https://i.ibb.co/7x12jcpj/alogo.png", "PNG", margin, y, 32, 9);
+    // doc.addImage("https://i.ibb.co/S7v1KXm5/logo.png", "PNG", margin, y, 32, 9);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(16);
@@ -310,7 +317,10 @@ export default function SuccessPage() {
     doc.text(companyGST, margin + 25, y);
 
     doc.text("Address:", margin, y + 6);
-    const companyAddrLines = doc.splitTextToSize(companyAddress, contentWidth - 80);
+    const companyAddrLines = doc.splitTextToSize(
+      companyAddress,
+      contentWidth - 80,
+    );
     doc.text(companyAddrLines, margin + 25, y + 6);
 
     let companyY = y + 6 + (companyAddrLines.length - 1) * 5;
@@ -323,7 +333,12 @@ export default function SuccessPage() {
     doc.text(order.orderId || "—", pageWidth - margin, y, { align: "right" });
 
     doc.text("Date:", pageWidth - margin - 60, y + 6);
-    doc.text(formatDateFull(order.orderDate) || "—", pageWidth - margin, y + 6, { align: "right" });
+    doc.text(
+      formatDateFull(order.orderDate) || "—",
+      pageWidth - margin,
+      y + 6,
+      { align: "right" },
+    );
 
     y = companyY + 18;
 
@@ -335,14 +350,16 @@ export default function SuccessPage() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9);
 
-    const buyerName = order.shipping?.name || user?.name || "—";
+    const buyerName = order.shipping?.name || "—";
     const buyerGST = order.shipping?.gst || "—";
-    const buyerPhone = order.shipping?.mobileNumber || user?.ContactNumber || "—";
-    const buyerEmail = order.shipping?.email || user?.Email || "—";
+    const buyerPhone = order.shipping?.mobileNumber || "—";
+    const buyerEmail = order.shipping?.email || "—";
     const buyerAddr = [
       order.shipping?.addressLine || "—",
       `${order.shipping?.city || "—"}, ${order.shipping?.state || "—"} ${order.shipping?.postCode || "—"}`,
-    ].filter(Boolean).join(", ");
+    ]
+      .filter(Boolean)
+      .join(", ");
 
     const buyerLines = doc.splitTextToSize(buyerAddr, contentWidth - 60);
 
@@ -360,16 +377,15 @@ export default function SuccessPage() {
 
     y += 20 + buyerLines.length * 5 + 18;
 
-  
-
     // ── Items Table ────────────────────────────────────────────────────
-    const tableData = order.items?.map(item => [
-      item.name,
-      item.size || "—",
-      item.quantity,
-      item.price,
-      item.price * item.quantity
-    ]) || [];
+    const tableData =
+      order.items?.map((item) => [
+        item.name,
+        item.size || "—",
+        item.quantity,
+        item.price,
+        item.price * item.quantity,
+      ]) || [];
 
     autoTable(doc, {
       startY: y,
@@ -416,9 +432,15 @@ export default function SuccessPage() {
 
     const totalsData = [
       ["Subtotal", formatCurrencySafe(totals.itemsSubtotal)],
-      ...(totals.taxRate > 0 ? [[`GST (${totals.taxRate}%)`, formatCurrencySafe(totals.taxAmount)]] : []),
-      ...(totals.shipping > 0 ? [["Shipping", formatCurrencySafe(totals.shipping)]] : []),
-      ...(totals.discount > 0 ? [["Discount", `-${formatCurrencySafe(totals.discount)}`]] : []),
+      ...(totals.taxRate > 0
+        ? [[`GST (${totals.taxRate}%)`, formatCurrencySafe(totals.taxAmount)]]
+        : []),
+      ...(totals.shipping > 0
+        ? [["Shipping", formatCurrencySafe(totals.shipping)]]
+        : []),
+      ...(totals.discount > 0
+        ? [["Discount", `-${formatCurrencySafe(totals.discount)}`]]
+        : []),
       ["Grand Total", formatCurrencySafe(totals.grandTotal)],
     ];
 
@@ -438,7 +460,9 @@ export default function SuccessPage() {
     doc.setFontSize(10);
     doc.setTextColor(200, 151, 58);
     doc.setFont("helvetica", "bold");
-    doc.text("Thank you for shopping with us!", pageWidth / 2, y, { align: "center" });
+    doc.text("Thank you for shopping with us!", pageWidth / 2, y, {
+      align: "center",
+    });
 
     y += 10;
 
@@ -449,7 +473,7 @@ export default function SuccessPage() {
       `Authorized by ${siteName} | GSTIN: ${companyGST} | For support: ${companyEmail}`,
       pageWidth / 2,
       y,
-      { align: "center" }
+      { align: "center" },
     );
 
     // Save the PDF
@@ -515,7 +539,7 @@ export default function SuccessPage() {
     return null;
   }
 
-  const siteName = settings?.siteName || "Creative N Colourful ";
+  const siteName = "Creative N Colourful ";
   const contactEmail = settings?.supportEmail || "support@grandmasala.com";
   const contactPhone = settings?.contactNumber || "+91 XXXX XXXX";
 
@@ -556,7 +580,6 @@ export default function SuccessPage() {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-12 no-print justify-center animate-fade-up stagger-2">
-
                 <button
                   onClick={handleDownloadPDF}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#C8973A] text-[#C8973A] rounded-lg font-medium text-sm hover:bg-[#FDF8F3] transition-all duration-300"
@@ -569,11 +592,26 @@ export default function SuccessPage() {
               {/* Key Details Grid */}
               <div className="grid grid-cols-3 gap-4 mb-12 animate-fade-up stagger-3">
                 {[
-                  { label: "Date", value: formatDate(order.orderDate), icon: Package },
-                  { label: "Time", value: formatTime(order.orderDate), icon: Truck },
-                  { label: "Payment", value: order.paymentType || "COD", icon: CreditCard },
+                  {
+                    label: "Date",
+                    value: formatDate(order.orderDate),
+                    icon: Package,
+                  },
+                  {
+                    label: "Time",
+                    value: formatTime(order.orderDate),
+                    icon: Truck,
+                  },
+                  {
+                    label: "Payment",
+                    value: order.paymentType || "COD",
+                    icon: CreditCard,
+                  },
                 ].map((item, i) => (
-                  <div key={i} className="text-center p-4 bg-[#FDF8F3] rounded-lg border border-[#E8DCC8]">
+                  <div
+                    key={i}
+                    className="text-center p-4 bg-[#FDF8F3] rounded-lg border border-[#E8DCC8]"
+                  >
                     <item.icon className="w-5 h-5 text-[#C8973A] mx-auto mb-2 opacity-60" />
                     <p className="text-xs font-light text-[#5C4033] uppercase tracking-wider mb-1">
                       {item.label}
@@ -602,7 +640,8 @@ export default function SuccessPage() {
                           {item.name}
                         </h3>
                         <p className="text-xs text-[#5C4033] font-light">
-                          {item.size || "—"} {item.color ? `• ${item.color}` : ""} ×{" "}
+                          {item.size || "—"}{" "}
+                          {item.color ? `• ${item.color}` : ""} ×{" "}
                           {item.quantity}
                         </p>
                       </div>
@@ -631,9 +670,7 @@ export default function SuccessPage() {
                     <div className="flex justify-between">
                       <span className="text-[#5C4033] font-light">Method</span>
                       <span className="text-[#2A1F14] font-medium">
-                        {order.payment?.method ||
-                          order.paymentType ||
-                          "—"}
+                        {order.payment?.method || order.paymentType || "—"}
                       </span>
                     </div>
                     <div className="flex justify-between">
@@ -714,14 +751,14 @@ export default function SuccessPage() {
                         </span>
                       </div>
 
-                      <div className="flex justify-between text-sm">
+                      {/* <div className="flex justify-between text-sm">
                         <span className="text-[#5C4033] font-light">
                           Subtotal (after tax)
                         </span>
                         <span className="text-[#2A1F14] font-medium">
                           {formatCurrency(totals.itemsWithTax)}
                         </span>
-                      </div>
+                      </div> */}
                     </>
                   )}
 

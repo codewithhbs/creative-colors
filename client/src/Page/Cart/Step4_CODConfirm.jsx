@@ -49,7 +49,7 @@ const Step4_CODConfirm = ({ orderTotal, codAdvancePaid, onPayAdvance, loading, s
         <button onClick={onPayAdvance} disabled={loading} className="co-btn-gold">
           {loading
             ? <><Loader size={16} className="co-spin" /> Processing…</>
-            : <>Pay ₹{codFee} Advance & Place Order</>}
+            : <>Place Order</>}
         </button>
       )}
     </div>

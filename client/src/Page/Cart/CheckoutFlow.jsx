@@ -11,7 +11,9 @@ import {
   CreditCard,
   Smartphone,
   CheckCircle,
-  Package
+  Package,
+  AlertCircle,
+  X
 } from "lucide-react"
 import { useSelector, useDispatch } from "react-redux"
 import {
@@ -266,6 +268,7 @@ const CheckoutFlow = () => {
     taxAmount, currencySymbol,
     appliedCoupon, settings: reduxSettings,
   } = useSelector(s => s.checkout);
+  
 
   const [guestDetails, setGuestDetails]       = useState({ Email: "", ContactNumber: "" });
   const [guestSubmitting, setGuestSubmitting] = useState(false);
@@ -452,6 +455,7 @@ const CheckoutFlow = () => {
       }
 
       const { razorpayOrderId, amount, currency, rezorPayKey } = result.payload;
+      console.log("razorpayOrderId",razorpayOrderId)
 
       const rzp = new window.Razorpay({
         key: rezorPayKey,

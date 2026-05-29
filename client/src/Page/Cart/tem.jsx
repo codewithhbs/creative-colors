@@ -243,7 +243,7 @@ const CheckoutFlow = () => {
         }
 
         const options = {
-          key: "cl5MoGsuti51hjjn25Fek46O", // apna key use karo
+          key: "rzp_live_Sv6CUp6lrYVBi7", // apna key use karo
           amount: amount * 100, // rupees → paise
           currency: currency || "INR",
           name: "Seizel Sixth India Private Limited",

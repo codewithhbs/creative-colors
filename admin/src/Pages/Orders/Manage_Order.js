@@ -295,13 +295,10 @@ const ManageOrder = () => {
         <span>Delivery Fee</span>
         <span>₹${order.shippingAmount.toFixed(2)}</span>
       </div>
-
-      ${order.paymentType === "COD" ? `
       <div>
-        <span>COD Fee</span>
-        <span>-₹${order.codFeeAmount.toFixed(2)}</span>
+        <span>GST Tax</span>
+        <span>18%</span>
       </div>
-      ` : ""}
 
       ${order.offerId ? `
       <div>
@@ -312,7 +309,7 @@ const ManageOrder = () => {
 
       <div class="final">
         <span>Total Paid</span>
-        <span>₹${order.payAmt - (order.paymentType === "COD" ? order.codFeeAmount : 0)}</span>
+        <span>₹${order.payAmt}</span>
       </div>
     </div>
 
