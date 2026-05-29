@@ -283,62 +283,70 @@ const CheckoutFlow = () => {
 
   /* ── Bootstrap ── */
   useEffect(() => {
-    const boot = async () => {
-      try {
-        // Fetch settings
-        const settingsRes = await axios.get("https://www.api.creativencolourful.com/api/v1/admin/settings");
-        if (settingsRes.data?.data) setSetting(settingsRes.data.data);
+  const boot = async () => {
+    try {
+      const storedCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
+      const storedCoupon = sessionStorage.getItem("appliedCoupon");
+      const couponData = storedCoupon ? JSON.parse(storedCoupon) : null;
 
-        // Fetch user if logged in
-        const token = sessionStorage.getItem("token_login");
-        if (token) {
-          dispatch(fetchUserDetails());
+      // ✅ STEP 1: Settings pehle fetch karo
+      const settingsRes = await axios.get("https://www.api.creativencolourful.com/api/v1/admin/settings");
+      if (settingsRes.data?.data) {
+        setSetting(settingsRes.data.data);
+      }
+
+      // ✅ STEP 2: fetchSettings dispatch karo aur WAIT karo
+      await dispatch(fetchSettings()).unwrap();
+
+      // ✅ STEP 3: AB calculateTotals — ab state.settings populated hai
+      dispatch(loadAppliedCoupon());
+      dispatch(calculateTotals({ cartItems: storedCart, appliedCoupon: couponData }));
+
+      // STEP 4: User fetch
+      const token = sessionStorage.getItem("token_login");
+      if (token) {
+        dispatch(fetchUserDetails());
+        try {
           const { data } = await axios.get("https://www.api.creativencolourful.com/api/v1/my-details", {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(data.data || {});
 
-          // Pre-fill last order address
-          try {
-            const lastOrder = await axios.get("https://www.api.creativencolourful.com/api/v1/my-last-order", {
-              headers: { Authorization: `Bearer ${token}` },
-            });
-            if (lastOrder.data?.success && lastOrder.data.order?.shipping) {
-              const s = lastOrder.data.order.shipping;
-              dispatch(updateAddress({ name: s.name||"", city: s.city||"", state: s.state||"",
-                postCode: s.postCode||"", addressType: s.addressType||"", addressLine: s.addressLine||"" }));
-            }
-          } catch {}
+          const lastOrder = await axios.get("https://www.api.creativencolourful.com/api/v1/my-last-order", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (lastOrder.data?.success && lastOrder.data.order?.shipping) {
+            const s = lastOrder.data.order.shipping;
+            dispatch(updateAddress({
+              name: s.name || "", city: s.city || "", state: s.state || "",
+              postCode: s.postCode || "", addressType: s.addressType || "", addressLine: s.addressLine || ""
+            }));
+          }
+        } catch {}
 
-          dispatch(setCurrentStep(1));
-        } else {
-          dispatch(setCurrentStep(0));
-        }
-
-        const storedCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
-        const storedCoupon = sessionStorage.getItem("appliedCoupon");
-        const couponData = storedCoupon ? JSON.parse(storedCoupon) : null;
-        dispatch(loadAppliedCoupon());
-        dispatch(calculateTotals({ cartItems: storedCart, appliedCoupon: couponData }));
-        dispatch(fetchSettings());
-
-        // Razorpay script
-        if (!document.getElementById("rzp-script")) {
-          const s = document.createElement("script");
-          s.id = "rzp-script";
-          s.src = "https://checkout.razorpay.com/v1/checkout.js";
-          s.async = true;
-          document.body.appendChild(s);
-        }
-      } catch (err) {
-        console.error("Checkout boot error:", err);
-      } finally {
-        setPageLoading(false);
+        dispatch(setCurrentStep(1));
+      } else {
+        dispatch(setCurrentStep(0));
       }
-    };
-    boot();
-    return () => { dispatch(resetCheckout()); };
-  }, [dispatch]);
+
+      // Razorpay script
+      if (!document.getElementById("rzp-script")) {
+        const s = document.createElement("script");
+        s.id = "rzp-script";
+        s.src = "https://checkout.razorpay.com/v1/checkout.js";
+        s.async = true;
+        document.body.appendChild(s);
+      }
+
+    } catch (err) {
+      console.error("Checkout boot error:", err);
+    } finally {
+      setPageLoading(false);
+    }
+  };
+  boot();
+  return () => { dispatch(resetCheckout()); };
+}, [dispatch]);
 
   /* ── Step handlers ── */
   const handleGuestSubmit = async () => {
